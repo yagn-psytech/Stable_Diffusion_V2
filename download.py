@@ -7,7 +7,7 @@ import os
 def download_model():
     # do a dry run of loading the huggingface model, which will download weights at build time
     #Set auth token which is required to download stable diffusion model weights
-    HF_AUTH_TOKEN = os.getenv("HF_AUTH_TOKEN")
+    HF_AUTH_TOKEN = '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' #os.getenv("HF_AUTH_TOKEN")
 
     lms = LMSDiscreteScheduler(
         beta_start=0.00085, 
@@ -16,7 +16,7 @@ def download_model():
     )
 
     model = StableDiffusionPipeline.from_pretrained(
-        "CompVis/stable-diffusion-v1-4", 
+        "stabilityai/stable-diffusion-2-1",
         scheduler=lms,
         use_auth_token=HF_AUTH_TOKEN
     )
