@@ -23,11 +23,11 @@ def inference(model_inputs:dict) -> dict:
 
     # Parse out your arguments
     prompt = model_inputs.get('prompt', None)
-    height = model_inputs.get('height', 512)
-    width = model_inputs.get('width', 512)
-    num_inference_steps = model_inputs.get('num_inference_steps', 50)
-    guidance_scale = model_inputs.get('guidance_scale', 7.5)
-    input_seed = model_inputs.get("seed",None)
+    # height = model_inputs.get('height', 512)
+    # width = model_inputs.get('width', 512)
+    # num_inference_steps = model_inputs.get('num_inference_steps', 50)
+    # guidance_scale = model_inputs.get('guidance_scale', 7.5)
+    # input_seed = model_inputs.get("seed",None)
     
     #If "seed" is not sent, we won't specify a seed in the call
     generator = None
@@ -41,9 +41,10 @@ def inference(model_inputs:dict) -> dict:
     with autocast("cuda"):
         image = model(prompt,height=height,width=width,num_inference_steps=num_inference_steps,guidance_scale=guidance_scale,generator=generator)["sample"][0]
     
-    buffered = BytesIO()
-    image.save(buffered,format="JPEG")
-    image_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+    # buffered = BytesIO()
+    # image.save(buffered,format="JPEG")
+    # image_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
     # Return the results as a dictionary
-    return {'image_base64': image_base64}
+    # return {'image_base64': image_base64}
+    return image
